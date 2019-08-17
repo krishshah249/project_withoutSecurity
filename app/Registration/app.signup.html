@@ -1,0 +1,446 @@
+<form>
+    <table>
+        <tr>
+            <td>
+                Select Category
+            </td>
+            <td>
+                <select name="category" [(ngModel)]="category" #categoryControl="ngModel" required>
+                    <option value="Admin">Admin</option>
+                    <option value="Merchant">Merchant</option>
+                    <option value="User">User</option>
+                </select>
+                <div *ngIf="categoryControl.touched && categoryControl.invalid">Category is required</div>
+            </td>
+        </tr>
+
+    </table>
+</form>
+<div *ngIf="category=='User'">
+    <form #accountForm="ngForm" name="signUpForm" (ngSubmit)="checkPass()">
+        <table>
+            <tr>
+                <td>
+                    Enter First Name
+                </td>
+                <td>
+                    <input type="text" maxlength="20" pattern="[a-zA-Z]*" id="firstName" name="firstName"
+                        [(ngModel)]="firstName" #firstNamecontrol="ngModel" required>
+                    <div
+                        *ngIf="firstNamecontrol.touched && firstNamecontrol.invalid && !firstNamecontrol.errors?.pattern">
+                        First Name is required</div>
+                    <div
+                        *ngIf="firstNamecontrol.touched && firstNamecontrol.errors?.pattern && firstNamecontrol.invalid">
+                        Invalid First Name</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Enter Last Name
+                </td>
+                <td>
+                    <input type="text" maxlength="20" pattern="[a-zA-Z]*" id="lastName" name="lastName"
+                        [(ngModel)]="lastName" #lastNamecontrol="ngModel">
+                    <div *ngIf="lastNamecontrol.touched && lastNamecontrol.invalid && !lastNamecontrol.errors?.pattern">
+                        Last Name is required</div>
+                    <div *ngIf="lastNamecontrol.touched && lastNamecontrol.errors?.pattern && lastNamecontrol.invalid">
+                        Invalid Last Name</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Enter Mobile Number
+                </td>
+                <td>
+                    <input type="number" pattern="[1-9][0-9]{9}" id="mobileNo" name="mobileNo" [(ngModel)]="mobileNo"
+                        #mobileNocontrol="ngModel" required>
+                    <div *ngIf="mobileNocontrol.touched && mobileNocontrol.invalid && !mobileNocontrol.errors?.pattern">
+                        Mobile Number is required</div>
+                    <div *ngIf="mobileNocontrol.touched && mobileNocontrol.errors?.pattern && mobileNocontrol.invalid">
+                        Mobile Number Should Be Of 10 digits</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Enter Address
+                </td>
+                <td>
+                    <textarea id="address" maxlength="150" name="address" [(ngModel)]="address"
+                        #addresscontrol="ngModel" required></textarea>
+                    <div *ngIf="addresscontrol.touched && addresscontrol.invalid">Address is required</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Enter Email Id
+                </td>
+                <td>
+                    <input type="email" maxlength="30" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+                        id="email" name="email" [(ngModel)]="emailId" #emailIdcontrol="ngModel" required>
+                    <div *ngIf="emailIdcontrol.touched && emailIdcontrol.invalid && !emailIdcontrol.errors?.pattern">
+                        Email Id is required</div>
+                    <div *ngIf="emailIdcontrol.touched && emailIdcontrol.errors?.pattern && emailIdcontrol.invalid">
+                        Invalid Email Id(Max length:30)</div>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Enter Password
+                </td>
+                <td>
+                    <input type="password" maxlength="20" pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%]).{8,20})"
+                        id="password" name="password" [(ngModel)]="password" #passwordcontrol="ngModel" required>
+                    <div *ngIf="passwordcontrol.touched && passwordcontrol.invalid && !passwordcontrol.errors?.pattern">
+                        Password is required</div>
+                    <div *ngIf="passwordcontrol.touched && passwordcontrol.errors?.pattern && passwordcontrol.invalid">
+                        Password Must Contain Atleast One Uppercase,One Lowercase Alphabet,One Digit And One Special
+                        Character "!@#$%"<br />
+                        Password Must Be Between 8 To 20 Characters</div>
+
+                    <!-- pattern="([a-z]+[A-Z]+[0-9]+[!@#$%^&*().-=]+){8,15}"-->
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Confirm Password
+                </td>
+                <td>
+                    <input type="password" maxlength="20" pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%]).{8,20})" id="confirmPass" name="confirmPass" [(ngModel)]="confirmPass"
+                        #confirmPasscontrol="ngModel" required>
+                    <div
+                        *ngIf="confirmPasscontrol.touched && confirmPasscontrol.invalid && !confirmPasscontrol.errors?.pattern">
+                        Confirm Password is required</div>
+                    <div
+                        *ngIf="confirmPasscontrol.touched && confirmPasscontrol.errors?.pattern && confirmPasscontrol.invalid">
+                        Password Must Contain Atleast One Uppercase,One Lowercase Alphabet,One Digit And One Special
+                        Character "!@#$%"<br />
+                        Password Must Be Between 8 To 20 Characters</div>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    Security Questions
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    The city in which you were raised
+                </td>
+                <td>
+                    <input type="password" maxlength="20" pattern="[a-zA-Z]*" id="firstSecurityQuestion" name="firstSecurityQuestion" [(ngModel)]="firstSecurityQuestion"
+                        #firstSecurityQuestioncontrol="ngModel" required>
+                    <div
+                        *ngIf="firstSecurityQuestioncontrol.touched && firstSecurityQuestioncontrol.invalid && !firstSecurityQuestioncontrol.errors?.pattern">
+                        Security Question is required</div>
+                    <div
+                        *ngIf="firstSecurityQuestioncontrol.touched && firstSecurityQuestioncontrol.errors?.pattern && firstSecurityQuestioncontrol.invalid">
+                        Invalid Answer
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Name of your school teacher
+                </td>
+                <td>
+                    <input type="password" maxlength="20" pattern="[a-zA-Z]*" id="secondSecurityQuestion" name="secondSecurityQuestion" [(ngModel)]="secondSecurityQuestion"
+                        #secondSecurityQuestioncontrol="ngModel" required>
+                    <div
+                        *ngIf="secondSecurityQuestioncontrol.touched && secondSecurityQuestioncontrol.invalid && !secondSecurityQuestioncontrol.errors?.pattern">
+                        Security Question is required</div>
+                    <div
+                        *ngIf="secondSecurityQuestioncontrol.touched && secondSecurityQuestioncontrol.errors?.pattern && secondSecurityQuestioncontrol.invalid">
+                        Invalid Answer    
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Create Account" [disabled]="accountForm.invalid" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div *ngIf="category=='Admin'">
+    <form #accountForm="ngForm" name="signUpForm" (ngSubmit)="checkPass()">
+        <table>
+            <tr>
+                <td>
+                    Enter First Name
+                </td>
+                <td>
+                    <input type="text" maxlength="20" pattern="[a-zA-Z]*" id="firstName" name="firstName"
+                        [(ngModel)]="firstName" #firstNamecontrol="ngModel" required>
+                    <div
+                        *ngIf="firstNamecontrol.touched && firstNamecontrol.invalid && !firstNamecontrol.errors?.pattern">
+                        First Name is required</div>
+                    <div
+                        *ngIf="firstNamecontrol.touched && firstNamecontrol.errors?.pattern && firstNamecontrol.invalid">
+                        Invalid First Name</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Enter Last Name
+                </td>
+                <td>
+                    <input type="text" maxlength="20" pattern="[a-zA-Z]*" id="lastName" name="lastName"
+                        [(ngModel)]="lastName" #lastNamecontrol="ngModel">
+                    <div *ngIf="lastNamecontrol.touched && lastNamecontrol.invalid && !lastNamecontrol.errors?.pattern">
+                        Last Name is required</div>
+                    <div *ngIf="lastNamecontrol.touched && lastNamecontrol.errors?.pattern && lastNamecontrol.invalid">
+                        Invalid Last Name</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Enter Email Id
+                </td>
+                <td>
+                    <input type="email" maxlength="30" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+                        id="email" name="email" [(ngModel)]="emailId" #emailIdcontrol="ngModel" required>
+                    <div *ngIf="emailIdcontrol.touched && emailIdcontrol.invalid && !emailIdcontrol.errors?.pattern">
+                        Email Id is required</div>
+                    <div *ngIf="emailIdcontrol.touched && emailIdcontrol.errors?.pattern && emailIdcontrol.invalid">
+                        Invalid Email Id(Max length:30)</div>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Enter Password
+                </td>
+                <td>
+                    <input type="password" maxlength="20" pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%]).{8,20})"
+                        id="password" name="password" [(ngModel)]="password" #passwordcontrol="ngModel" required>
+                    <div *ngIf="passwordcontrol.touched && passwordcontrol.invalid && !passwordcontrol.errors?.pattern">
+                        Password is required</div>
+                    <div *ngIf="passwordcontrol.touched && passwordcontrol.errors?.pattern && passwordcontrol.invalid">
+                        Password Must Contain Atleast One Uppercase,One Lowercase Alphabet,One Digit And One Special
+                        Character "!@#$%"<br />
+                        Password Must Be Between 8 To 20 Characters</div>
+
+                    <!-- pattern="([a-z]+[A-Z]+[0-9]+[!@#$%^&*().-=]+){8,15}"-->
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Confirm Password
+                </td>
+                <td>
+                    <input type="password" maxlength="20" id="confirmPass" name="confirmPass" [(ngModel)]="confirmPass"
+                        #confirmPasscontrol="ngModel" required>
+                    <div
+                        *ngIf="confirmPasscontrol.touched && confirmPasscontrol.invalid && !confirmPasscontrol.errors?.pattern">
+                        Confirm Password is required</div>
+                    <div
+                        *ngIf="confirmPasscontrol.touched && confirmPasscontrol.errors?.pattern && confirmPasscontrol.invalid">
+                        Password Must Contain Atleast One Uppercase,One Lowercase Alphabet,One Digit And One Special
+                        Character "!@#$%"<br />
+                        Password Must Be Between 8 To 20 Characters</div>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    The city in which you were raised
+                </td>
+                <td>
+                    <input type="password" maxlength="20" pattern="[a-zA-Z]*" id="firstSecurityQuestion" name="firstSecurityQuestion" [(ngModel)]="firstSecurityQuestion"
+                        #firstSecurityQuestioncontrol="ngModel" required>
+                    <div
+                        *ngIf="firstSecurityQuestioncontrol.touched && firstSecurityQuestioncontrol.invalid && !firstSecurityQuestioncontrol.errors?.pattern">
+                        Security Question is required</div>
+                    <div
+                        *ngIf="firstSecurityQuestioncontrol.touched && firstSecurityQuestioncontrol.errors?.pattern && firstSecurityQuestioncontrol.invalid">
+                        Invalid Answer
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Name of your school teacher
+                </td>
+                <td>
+                    <input type="password" maxlength="20" pattern="[a-zA-Z]*" id="secondSecurityQuestion" name="secondSecurityQuestion" [(ngModel)]="secondSecurityQuestion"
+                        #secondSecurityQuestioncontrol="ngModel" required>
+                    <div
+                        *ngIf="secondSecurityQuestioncontrol.touched && secondSecurityQuestioncontrol.invalid && !secondSecurityQuestioncontrol.errors?.pattern">
+                        Security Question is required</div>
+                    <div
+                        *ngIf="secondSecurityQuestioncontrol.touched && secondSecurityQuestioncontrol.errors?.pattern && secondSecurityQuestioncontrol.invalid">
+                        Invalid Answer    
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Create Account" [disabled]="accountForm.invalid" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div *ngIf="category=='Merchant'">
+    <form #accountForm="ngForm" name="signUpForm" (ngSubmit)="checkPass()">
+        <table>
+            <tr>
+                <td>
+                    Enter First Name
+                </td>
+                <td>
+                    <input type="text" maxlength="20" pattern="[a-zA-Z]*" id="firstName" name="firstName"
+                        [(ngModel)]="firstName" #firstNamecontrol="ngModel" required>
+                    <div
+                        *ngIf="firstNamecontrol.touched && firstNamecontrol.invalid && !firstNamecontrol.errors?.pattern">
+                        First Name is required</div>
+                    <div
+                        *ngIf="firstNamecontrol.touched && firstNamecontrol.errors?.pattern && firstNamecontrol.invalid">
+                        Invalid First Name</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Enter Last Name
+                </td>
+                <td>
+                    <input type="text" maxlength="20" pattern="[a-zA-Z]*" id="lastName" name="lastName"
+                        [(ngModel)]="lastName" #lastNamecontrol="ngModel">
+                    <div *ngIf="lastNamecontrol.touched && lastNamecontrol.invalid && !lastNamecontrol.errors?.pattern">
+                        Last Name is required</div>
+                    <div *ngIf="lastNamecontrol.touched && lastNamecontrol.errors?.pattern && lastNamecontrol.invalid">
+                        Invalid Last Name</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Enter Company Name
+                </td>
+                <td>
+                    <input type="text" maxlength="30" pattern="[a-zA-Z]*" id="company" name="company"
+                        [(ngModel)]="company" #companycontrol="ngModel">
+                    <div *ngIf="companycontrol.touched && companycontrol.invalid && !companycontrol.errors?.pattern">
+                        Company Name is required</div>
+                    <div *ngIf="companycontrol.touched && companycontrol.errors?.pattern && companycontrol.invalid">
+                        Invalid Company Name</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Enter Mobile Number
+                </td>
+                <td>
+                    <input type="number" pattern="[1-9][0-9]{9}" id="mobileNo" name="mobileNo" [(ngModel)]="mobileNo"
+                        #mobileNocontrol="ngModel" required>
+                    <div *ngIf="mobileNocontrol.touched && mobileNocontrol.invalid && !mobileNocontrol.errors?.pattern">
+                        Mobile Number is required</div>
+                    <div *ngIf="mobileNocontrol.touched && mobileNocontrol.errors?.pattern && mobileNocontrol.invalid">
+                        Mobile Number Should Be Of 10 digits</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Enter Address
+                </td>
+                <td>
+                    <textarea id="address" maxlength="150" name="address" [(ngModel)]="address"
+                        #addresscontrol="ngModel" required></textarea>
+                    <div *ngIf="addresscontrol.touched && addresscontrol.invalid">Address is required</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Enter Email Id
+                </td>
+                <td>
+                    <input type="email" maxlength="30" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+                        id="email" name="email" [(ngModel)]="emailId" #emailIdcontrol="ngModel" required>
+                    <div *ngIf="emailIdcontrol.touched && emailIdcontrol.invalid && !emailIdcontrol.errors?.pattern">
+                        Email Id is required</div>
+                    <div *ngIf="emailIdcontrol.touched && emailIdcontrol.errors?.pattern && emailIdcontrol.invalid">
+                        Invalid Email Id(Max length:30)</div>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Enter Password
+                </td>
+                <td>
+                    <input type="password" maxlength="20" pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%]).{8,20})"
+                        id="password" name="password" [(ngModel)]="password" #passwordcontrol="ngModel" required>
+                    <div *ngIf="passwordcontrol.touched && passwordcontrol.invalid && !passwordcontrol.errors?.pattern">
+                        Password is required</div>
+                    <div *ngIf="passwordcontrol.touched && passwordcontrol.errors?.pattern && passwordcontrol.invalid">
+                        Password Must Contain Atleast One Uppercase,One Lowercase Alphabet,One Digit And One Special
+                        Character "!@#$%"<br />
+                        Password Must Be Between 8 To 20 Characters</div>
+
+                    <!-- pattern="([a-z]+[A-Z]+[0-9]+[!@#$%^&*().-=]+){8,15}"-->
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Confirm Password
+                </td>
+                <td>
+                    <input type="password" maxlength="20" id="confirmPass" name="confirmPass" [(ngModel)]="confirmPass"
+                        #confirmPasscontrol="ngModel" required>
+                    <div
+                        *ngIf="confirmPasscontrol.touched && confirmPasscontrol.invalid && !confirmPasscontrol.errors?.pattern">
+                        Confirm Password is required</div>
+                    <div
+                        *ngIf="confirmPasscontrol.touched && confirmPasscontrol.errors?.pattern && confirmPasscontrol.invalid">
+                        Password Must Contain Atleast One Uppercase,One Lowercase Alphabet,One Digit And One Special
+                        Character "!@#$%"<br />
+                        Password Must Be Between 8 To 20 Characters
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    The city in which you were raised
+                </td>
+                <td>
+                    <input type="password" maxlength="20" pattern="[a-zA-Z]*" id="firstSecurityQuestion" name="firstSecurityQuestion" [(ngModel)]="firstSecurityQuestion"
+                        #firstSecurityQuestioncontrol="ngModel" required>
+                    <div
+                        *ngIf="firstSecurityQuestioncontrol.touched && firstSecurityQuestioncontrol.invalid && !firstSecurityQuestioncontrol.errors?.pattern">
+                        Security Question is required</div>
+                    <div
+                        *ngIf="firstSecurityQuestioncontrol.touched && firstSecurityQuestioncontrol.errors?.pattern && firstSecurityQuestioncontrol.invalid">
+                        Invalid Answer
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Name of your school teacher
+                </td>
+                <td>
+                    <input type="password" maxlength="20" pattern="[a-zA-Z]*" id="secondSecurityQuestion" name="secondSecurityQuestion" [(ngModel)]="secondSecurityQuestion"
+                        #secondSecurityQuestioncontrol="ngModel" required>
+                    <div
+                        *ngIf="secondSecurityQuestioncontrol.touched && secondSecurityQuestioncontrol.invalid && !secondSecurityQuestioncontrol.errors?.pattern">
+                        Security Question is required</div>
+                    <div
+                        *ngIf="secondSecurityQuestioncontrol.touched && secondSecurityQuestioncontrol.errors?.pattern && secondSecurityQuestioncontrol.invalid">
+                        Invalid Answer    
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Create Account" [disabled]="accountForm.invalid" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
